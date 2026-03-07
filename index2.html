@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR" data-lt-installed="true">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Dr. Thiago Mendonça Jayme | Cuidado Especializado com o seu Coração</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#022c22", // Azul da logo
+                        secondary: "#d9d9d9", // Cinza da logo
+                        accent: "#059669", // Ouro Premium Refinado
+                        gold: "#059669",
+                        "gold-light": "#EAD098",
+                        cyan: "#FFD700", // Dourado Vibrante
+                        "cyan-glow": "rgba(5, 150, 105, 0.4)",
+                        "background-light": "#f8f9fa", // Cinza bem claro para fundos suaves
+                        "background-soft": "#f1f5f9",
+                        "background-dark": "#022c22", // Versão bem escura do azul para dark mode
+                    },
+                    fontFamily: {
+                        display: ["Nunito", "sans-serif"],
+                        sans: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        'xl': '1.75rem',
+                        '2xl': '2.5rem',
+                    },
+                    animation: {
+                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+                        'fade-in-up-delay-1': 'fade-in-up 0.8s ease-out 0.2s forwards',
+                        'fade-in-up-delay-2': 'fade-in-up 0.8s ease-out 0.4s forwards',
+                        'fade-in-up-delay-3': 'fade-in-up 0.8s ease-out 0.6s forwards',
+                        'float': 'float 5s ease-in-out infinite',
+                        'float-slow': 'float 7s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
+                        'blob': 'blob 10s infinite',
+                        'glow-border': 'glow-border 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translate3d(0, 30px, 0)' },
+                            '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+                            '50%': { transform: 'translate3d(0, -15px, 0)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(5, 150, 105, 0)' },
+                            '50%': { boxShadow: '0 0 25px rgba(5, 150, 105, 0.4)' },
+                        },
+                        'blob': {
+                            '0%': { transform: 'translate3d(0px, 0px, 0) scale(1)' },
+                            '33%': { transform: 'translate3d(30px, -50px, 0) scale(1.1)' },
+                            '66%': { transform: 'translate3d(-20px, 20px, 0) scale(0.9)' },
+                            '100%': { transform: 'translate3d(0px, 0px, 0) scale(1)' },
+                        },
+                        'glow-border': {
+                            '0%, 100%': { borderColor: 'rgba(5, 150, 105, 0.1)', boxShadow: '0 0 0 rgba(5, 150, 105, 0)' },
+                            '50%': { borderColor: 'rgba(5, 150, 105, 0.4)', boxShadow: '0 0 20px rgba(5, 150, 105, 0.2)' },
+                        }
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply text-[18px] leading-relaxed;
+            }
+            h1, h2, h3, h4 {
+                @apply tracking-tight font-display;
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #1A2E44, #5C6B7B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            bottom: -20px;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .step-line:last-child::before {
+            display: none;
+        }
+        .glass-card-premium {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease;
+            will-change: transform;
+            position: relative;
+        }
+        .glass-card-premium::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(5, 150, 105, 0.1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glass-card-premium:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(5, 150, 105, 0.3);
+            transform: translate3d(0, -4px, 0);
+        }
+        .glass-card-premium:hover::after {
+            opacity: 1;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f0f4f8] text-slate-600 font-sans antialiased">
+    <header id="main-header"
+        class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent py-2">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <img src="https://i.postimg.cc/jjvcVryh/Design-sem-nome-(23).png"
+                        alt="Dr. Thiago Mendonça Jayme - Cardiologista"
+                        class="h-16 lg:h-[4.5rem] w-auto object-contain transition-all duration-300 brightness-0 invert"
+                        id="header-logo">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a class="text-sm font-semibold header-link text-white hover:text-[#059669] transition-colors"
+                        href="#inicio" style="">Início</a>
+                    <a class="text-sm font-semibold header-link text-white hover:text-[#059669] transition-colors"
+                        href="#sobre" style="">Dr. Thiago</a>
+                    <a class="text-sm font-semibold header-link text-white hover:text-[#059669] transition-colors"
+                        href="#ajuda" style="">Tratamentos</a>
+                    <a class="text-sm font-semibold header-link text-white hover:text-[#059669] transition-colors"
+                        href="#jornada" style="">Sua
+                        Jornada</a>
+                    <a class="text-sm font-semibold header-link text-white hover:text-[#059669] transition-colors"
+                        href="#planos" style="">Convênios</a>
+                </nav>
+                <div>
+                    <a class="bg-white text-[#022c22] px-7 py-3 rounded-full font-extrabold text-sm flex items-center gap-2 hover:bg-slate-100 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] border border-transparent"
+                        href="https://wa.me/5500000000000" style="">
+                        Agendar Consulta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="">
+        <section
+            class="relative overflow-hidden min-h-[100svh] flex items-center pt-32 pb-10 lg:pt-40 lg:pb-12 bg-[#022c22] text-white"
+            id="inicio">
+            <!-- Background gradients (Premium White) -->
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(24,40,71,0.03)_0%,transparent_60%)]">
+            </div>
+            <div
+                class="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(24,40,71,0.02)_0%,transparent_70%)]">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+                <!-- Premium Detail: ECG Heartbeat SVG -->
+                <div
+                    class="absolute -left-10 lg:-left-20 top-[60%] -translate-y-1/2 opacity-20 hidden md:block w-96 z-0">
+                    <svg viewBox="0 0 500 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 75L150 75L170 30L190 120L210 5L230 110L250 75L500 75" stroke="#059669"
+                            stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+                            style="stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: ecg 3s linear infinite;">
+                        </path>
+                    </svg>
+                    <style>
+                        @keyframes ecg {
+                            0% {
+                                stroke-dashoffset: 1000;
+                            }
+
+                            100% {
+                                stroke-dashoffset: 0;
+                            }
+                        }
+                    </style>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center relative z-10">
+                    <div class="text-center lg:text-left mt-6 lg:mt-0">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#059669]/10 border border-[#059669]/20 text-[#059669] text-xs font-bold mb-6 uppercase tracking-widest animate-fade-in-up opacity-0 will-change-transform transform-gpu">
+                            <span class="material-symbols-outlined text-base">verified</span>
+                            Cardiologia de Alta Precisão
+                        </div>
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-[4rem] font-black text-white leading-[1.05] tracking-tight mb-6 animate-fade-in-up-delay-1 opacity-0 will-change-transform transform-gpu">
+                            Tranquilidade para o <span class="text-[#059669] block md:inline mt-1 md:mt-0">seu
+                                coração</span> bater com alegria.
+                        </h1>
+                        <p
+                            class="text-base md:text-lg text-blue-100/80 mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up-delay-2 opacity-0 will-change-transform transform-gpu font-medium leading-relaxed">
+                            Atendimento acolhedor, explicações diretas e os tratamentos mais modernos do mundo para que
+                            você se sinta seguro em cada passo da sua saúde cardiovascular.
+                        </p>
+                        <div
+                            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up-delay-3 opacity-0 will-change-transform transform-gpu">
+                            <a class="bg-[#059669] text-white px-8 py-4 rounded-xl font-black text-lg flex items-center justify-center gap-3 hover:-translate-y-1 hover:bg-[#047857] transition-all duration-300 shadow-[0_4px_20px_rgba(5,150,105,0.4)] hover:shadow-[0_8px_30px_rgba(5,150,105,0.5)] will-change-transform"
+                                href="https://wa.me/5500000000000">
+                                <span class="material-symbols-outlined text-2xl">chat</span>
+                                Falar no WhatsApp
+                            </a>
+                            <a class="px-6 py-4 rounded-xl font-bold text-base border border-blue-200/30 text-white flex items-center justify-center gap-2 hover:bg-white/5 hover:border-white transition-all group"
+                                href="#" target="_blank">
+                                Agendar pela
+                                <img src="https://prowly-prod.s3.eu-west-1.amazonaws.com/uploads/5726/assets/794830/large-c3064e6ec7d00b084843978e11444652.png"
+                                    alt="Doctoralia"
+                                    class="h-5 object-contain transition-all brightness-0 invert group-hover:brightness-100 group-hover:invert-0">
+                            </a>
+                        </div>
+                        <div class="mt-14 flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start animate-fade-in-up-delay-3 opacity-0 will-change-transform transform-gpu"
+                            style="animation-delay: 0.8s;">
+                            <div class="flex -space-x-4">
+                                <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#022c22]"
+                                    loading="lazy"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAebeRcMTzVX6QADG2QKQwSkOGx3fD8XIKZOw37ooySxCO2XDVGqu4915zruk9vXXrXOSpNj3kxeCdn3tS3DTTGBmcvDbDjuEgHU_JiAChGZ7UIK-ljYRea3m0SMhIK6ojhyhHCl9WS_hVdPipJlscZ33cDpOsDnr4TIdJnTntq6aUPRr1qpVP0aZYPoiZCDgEU-kKR-dlB4o6nvBiA0VkkVGmX_sZCk_TA2yqus35NsczE104n3xo5XmLOGlDH2HJr5EegTG8PI2E"
+                                    style="">
+                                <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#022c22]"
+                                    loading="lazy"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAETTSzvjleGta4bEyMcuYg00Yz33OEDucPczXE5qSTZ8Bkk2YLHHqyFtV0ez7qBLMvEsDJVsC3YluwcnPv552K_3zv97DB8nkNPhURrxha3ujff0U6VUgONBrPeY9JsvCLr5vSiYKO8UHDXj7lR-twEWJ7KGcWLzvkhBBGu2AFI25evoQQK646Y15Hg6V1HEUZjyC0nrpxsZAKgfAfFky1E24xzwc3rCnMPIhkcBsozvZynuuAhxwqUYyN44OPWAvbiL--KGIQh94"
+                                    style="">
+                                <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#022c22]"
+                                    loading="lazy"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJX0sdW0RQsoV92sjSjJC_fj4Aqchc73SKWbxtRedZhMdv96Mg_CnvIUiGjIaQQBcWlou7SZkVt6nDoXv9EfpY5IOazaHwjvqE_ykUWSInZniO2wl0CFzwP8kVaA_ehMM3qTAqXrkZwNrSblwgDI3D5eRaeGaK_VAmHR0JJY8DOnxyfIJuuVzk8WFMplDhsWq598n4FkCgX2MCOXV8xfJQC9oVFF6-16O_cNTAuR3MJPUwV4VVXqQqXHeUUH1Pmq8xFYQ2NoSDH9Q"
+                                    style="">
+                            </div>
+                            <p class="text-sm font-semibold text-blue-200/70" style="">Mais de <span
+                                    class="text-[#059669] font-extrabold" style="">5.000 pacientes</span> cuidados com
+                                toda
+                                a
+                                atenção.</p>
+                        </div>
+                    </div>
+                    <div class="relative animate-fade-in-up-delay-2 opacity-0 will-change-transform transform-gpu">
+                        <div
+                            class="absolute -inset-4 bg-secondary/20 blur-3xl rounded-[3rem] pointer-events-none opacity-50">
+                        </div>
+                        <div class="relative animate-float-slow will-change-transform transform-gpu">
+                            <img alt="Dr. Thiago Jayme"
+                                class="relative z-10 w-full h-[500px] sm:h-[600px] lg:h-[700px] object-cover rounded-[2rem] shadow-2xl ring-1 ring-white/10"
+                                src="https://i.postimg.cc/ncJS2XRQ/DSC00367.jpg" fetchpriority="high">
+
+                            <!-- Floating CRM/RQE Card -->
+                            <div class="absolute -bottom-4 sm:-bottom-8 -right-2 sm:-right-8 lg:right-6 bg-white p-4 sm:p-5 rounded-3xl shadow-2xl z-20 flex items-center gap-4 animate-float will-change-transform transform-gpu"
+                                style="animation-delay: 1s; will-change: transform;">
+                                <div
+                                    class="bg-[#ecfdf5] w-14 h-14 rounded-full flex items-center justify-center text-[#059669]">
+                                    <span class="material-symbols-outlined text-3xl">workspace_premium</span>
+                                </div>
+                                <div class="flex flex-col text-left">
+                                    <p class="text-base text-slate-500 font-semibold tracking-wide">CRM-GO 19335</p>
+                                    <p class="text-[17px] font-black text-[#0c1938]">RQE 17470 / 17471 / 20572</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="py-12 lg:py-16 bg-[#022c22] relative overflow-hidden" id="ajuda">
+            <div class="absolute inset-0 bg-[#022c22] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full text-center lg:text-left">
+                <div class="max-w-5xl mb-8 lg:mb-10 mx-auto lg:mx-0">
+                    <p class="text-[#065f46] font-bold tracking-[0.2em] uppercase text-[9px] lg:text-[10px] mb-2">Áreas
+                        de Atuação Médica</p>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 lg:mb-4 leading-tight">
+                        Diagnóstico preciso e <span class="text-[#059669]">tecnologia de ponta</span>
+                    </h2>
+                    <p class="text-sm lg:text-base text-blue-100/60 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Tratamentos avançados para garantir que seu coração mantenha o ritmo ideal.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-stretch">
+                    <!-- Card 1: Arritmias Cardíacas -->
+                    <div
+                        class="lg:col-span-8 glass-card-premium rounded-xl p-5 lg:p-7 flex flex-col justify-between group transition-all h-full overflow-hidden relative">
+                        <div class="relative z-10">
+                            <div
+                                class="w-10 h-10 lg:w-14 lg:h-14 bg-[#065f46]/10 rounded-lg flex items-center justify-center mb-5 lg:mb-6 text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-all duration-500 shadow-[0_0_15px_rgba(5,150,105,0.05)]">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl">ecg_heart</span>
+                            </div>
+                            <h3
+                                class="text-xl lg:text-2xl font-black text-white mb-3 group-hover:text-[#059669] transition-colors">
+                                Arritmias Cardíacas</h3>
+                            <p class="text-xs lg:text-base text-blue-100/70 leading-relaxed max-w-xl">
+                                Avaliação meticulosa e tratamento personalizado para todos os tipos de distúrbios do
+                                ritmo cardíaco, com tecnologia de ponta.
+                            </p>
+                        </div>
+                        <div
+                            class="mt-6 flex items-center gap-2 text-[#059669] font-bold text-[9px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <span>Falar Conosco</span>
+                            <span
+                                class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Fibrilação Atrial -->
+                    <div
+                        class="lg:col-span-4 glass-card-premium rounded-xl p-5 lg:p-6 flex flex-col justify-between group transition-all">
+                        <div>
+                            <div
+                                class="w-10 h-10 bg-[#065f46]/10 rounded-lg flex items-center justify-center mb-5 text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-all duration-500">
+                                <span class="material-symbols-outlined text-xl">monitor_heart</span>
+                            </div>
+                            <h3
+                                class="text-lg lg:text-xl font-bold text-white mb-2 group-hover:text-[#059669] transition-colors leading-tight">
+                                Fibrilação Atrial</h3>
+                            <p class="text-[11px] lg:text-xs text-blue-100/60 leading-relaxed">
+                                Controle do ritmo e prevenção de AVC com suporte especializado.
+                            </p>
+                        </div>
+                        <div
+                            class="mt-4 flex items-center gap-2 text-[#059669] font-bold text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                            <span>Detalhes</span>
+                            <span
+                                class="material-symbols-outlined text-[10px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Taquicardias -->
+                    <div
+                        class="lg:col-span-4 glass-card-premium rounded-xl p-5 lg:p-6 flex flex-col justify-between group transition-all">
+                        <div>
+                            <div
+                                class="w-10 h-10 bg-[#065f46]/10 rounded-lg flex items-center justify-center mb-5 text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-all duration-500">
+                                <span class="material-symbols-outlined text-xl">speed</span>
+                            </div>
+                            <h3
+                                class="text-lg lg:text-xl font-bold text-white mb-2 group-hover:text-[#059669] transition-colors">
+                                Taquicardias</h3>
+                            <p class="text-[11px] lg:text-xs text-blue-100/60 leading-relaxed">
+                                Investigação e ablação definitiva de corações acelerados.
+                            </p>
+                        </div>
+                        <div
+                            class="mt-4 flex items-center gap-2 text-[#059669] font-bold text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                            <span>Saber Mais</span>
+                            <span
+                                class="material-symbols-outlined text-[10px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Bradicardias -->
+                    <div
+                        class="lg:col-span-4 glass-card-premium rounded-xl p-5 lg:p-6 flex flex-col justify-between group transition-all">
+                        <div>
+                            <div
+                                class="w-10 h-10 bg-[#065f46]/10 rounded-lg flex items-center justify-center mb-5 text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-all duration-500">
+                                <span class="material-symbols-outlined text-xl">favorite</span>
+                            </div>
+                            <h3
+                                class="text-lg lg:text-xl font-bold text-white mb-2 group-hover:text-[#059669] transition-colors">
+                                Bradicardias</h3>
+                            <p class="text-[11px] lg:text-xs text-blue-100/60 leading-relaxed">
+                                Suporte especializado em marcapassos inovadores.
+                            </p>
+                        </div>
+                        <div
+                            class="mt-4 flex items-center gap-2 text-[#059669] font-bold text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                            <span>Ver Mais</span>
+                            <span
+                                class="material-symbols-outlined text-[10px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Insuficiência Cardíaca -->
+                    <div
+                        class="lg:col-span-4 glass-card-premium rounded-xl p-5 lg:p-6 flex flex-col justify-between group transition-all">
+                        <div>
+                            <div
+                                class="w-10 h-10 bg-[#065f46]/10 rounded-lg flex items-center justify-center mb-5 text-[#059669] group-hover:bg-[#059669] group-hover:text-white transition-all duration-500">
+                                <span class="material-symbols-outlined text-xl">cardiology</span>
+                            </div>
+                            <h3
+                                class="text-lg lg:text-xl font-bold text-white mb-2 group-hover:text-[#059669] transition-colors">
+                                Insuficiência</h3>
+                            <p class="text-[11px] lg:text-xs text-blue-100/60 leading-relaxed">
+                                Terapias avançadas para otimizar hearts enfraquecidos.
+                            </p>
+                        </div>
+                        <div
+                            class="mt-4 flex items-center gap-2 text-[#059669] font-bold text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
+                            <span>Saiba Mais</span>
+                            <span
+                                class="material-symbols-outlined text-[10px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Unified Expertise Section (Bio + Timeline) -->
+        <section class="py-16 lg:py-24 bg-white relative overflow-hidden" id="sobre">
+            <div class="absolute inset-0 bg-slate-50/50 pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-14 items-center mb-20" x-data="{ active: 0, items: 4 }"
+                    x-init="setInterval(() => { active = (active + 1) % items; $refs.slider.scrollTo({left: active * $refs.slider.offsetWidth, behavior: 'smooth'}) }, 5000)">
+                    <div class="order-2 lg:order-1">
+                        <p class="text-[#065f46] font-bold tracking-[0.2em] uppercase text-[10px] lg:text-xs mb-3">
+                            Especialista em Arritmias</p>
+                        <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-black text-[#022c22] mb-2 leading-tight">
+                            Sobre o Dr. Thiago Mendonça Jayme</h2>
+                        <div
+                            class="inline-block bg-[#059669]/10 text-[#065f46] px-3 py-1 rounded-full text-[10px] lg:text-xs font-bold mb-6 border border-[#059669]/20">
+                            CRM-GO 19335 | RQE 17470 / 17471
+                        </div>
+
+                        <div class="space-y-5 text-slate-600 text-sm lg:text-base leading-relaxed">
+                            <p>
+                                Com uma trajetória pautada na excelência e no cuidado humano, o Dr. Thiago dedicou sua
+                                carreira a compreender e tratar os ritmos do coração. Formado em Medicina pela renomada
+                                <strong>Universidade Federal de Goiás (UFG)</strong>, buscou aprimoramento nos maiores
+                                centros de referência do país.
+                            </p>
+                            <p>
+                                Concluiu sua especialização em Cardiologia, Eletrofisiologia Clínica Invasiva e
+                                Estimulação Cardíaca Artificial no prestigiado <strong>Instituto Dante Pazzanese de
+                                    Cardiologia</strong>, em São Paulo - SP, uma das instituições mais respeitadas da
+                                América Latina.
+                            </p>
+                            <p>
+                                Seu foco é oferecer um atendimento ético, acolhedor e altamente técnico, utilizando as
+                                melhores evidências científicas para tratar arritmias, realizar implantes de marcapassos
+                                e cuidar da saúde cardiovascular integral de seus pacientes.
+                            </p>
+                        </div>
+
+                        <div class="mt-8">
+                            <a class="bg-[#059669] text-white px-7 py-3.5 rounded-xl font-black text-base inline-flex items-center gap-2 hover:-translate-y-1 hover:bg-[#047857] transition-all duration-300 shadow-[0_4px_15px_rgba(5,150,105,0.3)] hover:shadow-[0_8px_25px_rgba(5,150,105,0.4)]"
+                                href="https://wa.me/5500000000000">
+                                Agendar uma avaliação
+                                <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 relative group-slider max-w-[88%] lg:max-w-[450px] mx-auto">
+                        <!-- Premium Aura Background -->
+                        <div
+                            class="absolute -inset-8 bg-[#059669]/5 blur-[80px] rounded-full opacity-50 pointer-events-none transition-opacity duration-700">
+                        </div>
+
+                        <!-- Main Slider Container -->
+                        <div
+                            class="relative bg-slate-50 rounded-[2rem] p-3 border border-slate-200 shadow-xl overflow-hidden group">
+                            <!-- CSS Snap Slider -->
+                            <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide no-scrollbar relative z-10"
+                                id="photo-slider" x-ref="slider" style="scroll-behavior: smooth;">
+                                <!-- Photo 1 -->
+                                <div class="w-full flex-shrink-0 snap-center px-1.5">
+                                    <img src="https://i.postimg.cc/6Q5D08Qy/DSC00325.jpg"
+                                        alt="Dr. Thiago Mendonça Jayme - Especialista" loading="lazy"
+                                        class="w-full h-auto rounded-[1.75rem] object-cover transition-transform duration-700 hover:scale-105">
+                                </div>
+                                <!-- Photo 2 -->
+                                <div class="w-full flex-shrink-0 snap-center px-1.5">
+                                    <img src="https://i.postimg.cc/rsbbyjGP/DSC00322.jpg"
+                                        alt="Dr. Thiago Mendonça Jayme - Excelência" loading="lazy"
+                                        class="w-full h-auto rounded-[1.75rem] object-cover transition-transform duration-700 hover:scale-105">
+                                </div>
+                                <!-- Photo 3 -->
+                                <div class="w-full flex-shrink-0 snap-center px-1.5">
+                                    <img src="https://i.postimg.cc/ncJS2XRQ/DSC00367.jpg"
+                                        alt="Dr. Thiago Mendonça Jayme - Autoridade" loading="lazy"
+                                        class="w-full h-auto rounded-[1.75rem] object-cover transition-transform duration-700 hover:scale-105">
+                                </div>
+                                <!-- Photo 4 -->
+                                <div class="w-full flex-shrink-0 snap-center px-1.5">
+                                    <img src="https://i.postimg.cc/Wprf0GnR/DSC00370.jpg"
+                                        alt="Dr. Thiago Mendonça Jayme - Cuidado" loading="lazy"
+                                        class="w-full h-auto rounded-[1.75rem] object-cover transition-transform duration-700 hover:scale-105">
+                                </div>
+                            </div>
+
+                            <!-- Minimalist Navigation Indicators -->
+                            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 z-30">
+                                <template x-for="i in items" :key="i-1">
+                                    <button
+                                        @click="active = i-1; $refs.slider.scrollTo({left: active * $refs.slider.offsetWidth, behavior: 'smooth'})"
+                                        class="w-2.5 h-2.5 rounded-full transition-all border border-slate-300"
+                                        :class="active === i-1 ? 'bg-[#059669] scale-110' : 'bg-slate-200 hover:bg-slate-300'"
+                                        :aria-label="'Foto ' + i"></button>
+                                </template>
+                            </div>
+
+                            <!-- Decorative Border Detail -->
+                            <div
+                                class="absolute inset-0 border border-slate-200/50 rounded-[2rem] pointer-events-none z-20">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compact Academy Credentials Grid -->
+            </div>
+        </section>
+
+        <!-- Formação Section (Dark Theme) -->
+        <section class="py-16 lg:py-24 bg-[#022c22] relative overflow-hidden" id="formacao">
+            <div class="absolute inset-0 bg-[#022c22] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="mt-20">
+                    <div class="text-center mb-16">
+                        <p class="text-[#059669] font-bold tracking-[0.2em] uppercase text-xs mb-4">Formação de
+                            Excelência
+                        </p>
+                        <h2 class="text-3xl md:text-5xl font-black text-white">Excelência Acadêmica e Prática</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                        <!-- Credential 1: Estimulação Cardíaca -->
+                        <div
+                            class="bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-[#059669]/50 transition-all duration-300 group">
+                            <div class="flex items-start gap-6">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-[#059669]/10 flex items-center justify-center text-[#059669] group-hover:bg-[#059669] group-hover:text-[#022c22] transition-colors flex-shrink-0">
+                                    <span class="material-symbols-outlined text-3xl">workspace_premium</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xl mb-1">Estimulação Cardíaca Artificial</h4>
+                                    <p class="text-[#059669] text-sm font-bold uppercase tracking-wider mb-2">Instituto
+                                        Dante Pazzanese (SP)</p>
+                                    <p class="text-blue-100/50 text-sm leading-relaxed">Implante e acompanhamento de
+                                        marcapassos e cardiodesfibriladores.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credential 2: Eletrofisiologia Invasiva -->
+                        <div
+                            class="bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-[#059669]/50 transition-all duration-300 group">
+                            <div class="flex items-start gap-6">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-[#059669] group-hover:text-[#022c22] transition-colors flex-shrink-0">
+                                    <span class="material-symbols-outlined text-3xl">science</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xl mb-1">Eletrofisiologia Clínica Invasiva</h4>
+                                    <p class="text-[#059669] text-sm font-bold uppercase tracking-wider mb-2">Instituto
+                                        Dante Pazzanese (SP)</p>
+                                    <p class="text-blue-100/50 text-sm leading-relaxed">Tratamento e ablação por cateter
+                                        de
+                                        arritmias complexas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credential 3: Cardiologia -->
+                        <div
+                            class="bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-[#059669]/50 transition-all duration-300 group">
+                            <div class="flex items-start gap-6">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-[#059669] group-hover:text-[#022c22] transition-colors flex-shrink-0">
+                                    <span class="material-symbols-outlined text-3xl">stethoscope</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xl mb-1">Residência em Cardiologia</h4>
+                                    <p class="text-[#059669] text-sm font-bold uppercase tracking-wider mb-2">Formação
+                                        Base
+                                        e Cuidados Intensivos</p>
+                                    <p class="text-blue-100/50 text-sm leading-relaxed">Diagnóstico cardiológico
+                                        avançado e
+                                        acompanhamento clínico.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credential 4: UFG -->
+                        <div
+                            class="bg-white/5 backdrop-blur-sm p-8 rounded-3xl border border-white/10 hover:border-[#059669]/50 transition-all duration-300 group">
+                            <div class="flex items-start gap-6">
+                                <div
+                                    class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-[#059669] group-hover:text-[#022c22] transition-colors flex-shrink-0">
+                                    <span class="material-symbols-outlined text-3xl">school</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xl mb-1">Graduação em Medicina</h4>
+                                    <p class="text-[#059669] text-sm font-bold uppercase tracking-wider mb-2">
+                                        Universidade
+                                        Federal de Goiás (UFG)</p>
+                                    <p class="text-blue-100/50 text-sm leading-relaxed">Base acadêmica sólida na
+                                        instituição
+                                        mais prestigiada de Goiás.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 bg-white" id="jornada">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold text-[#022c22] mb-8" style="">Como
+                            será o seu atendimento</h2>
+                        <p class="text-xl text-slate-500 mb-12" style="">Desde o primeiro contato, cuidamos de cada
+                            detalhe para que sua experiência seja leve e sem estresse.</p>
+                        <div class="space-y-12">
+                            <div class="relative flex gap-8 step-line">
+                                <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-[#022c22] font-bold z-10 shadow-lg shadow-accent/40 text-xl"
+                                    style="">1</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold text-[#022c22] mb-3" style="">
+                                        Boas-vindas e Agendamento</h4>
+                                    <p class="text-slate-500 text-lg" style="">Nossa equipe atende você pelo WhatsApp de
+                                        forma humana, tirando dúvidas básicas e agendando seu horário.</p>
+                                </div>
+                            </div>
+                            <div class="relative flex gap-8 step-line">
+                                <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-[#022c22] font-bold z-10 shadow-lg shadow-accent/40 text-xl"
+                                    style="">2</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold text-[#022c22] mb-3" style="">Conversa
+                                        Sem Pressa</h4>
+                                    <p class="text-slate-500 text-lg" style="">No consultório, Dr. Thiago ouve sua
+                                        história com atenção, priorizando entender você antes de qualquer exame.</p>
+                                </div>
+                            </div>
+                            <div class="relative flex gap-8 step-line">
+                                <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-[#022c22] font-bold z-10 shadow-lg shadow-accent/40 text-xl"
+                                    style="">3</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold text-[#022c22] mb-3" style="">Plano de
+                                        Cuidado Simples</h4>
+                                    <p class="text-slate-500 text-lg" style="">Explicamos o diagnóstico de forma visual
+                                        e fácil, criando juntos um caminho para sua recuperação.</p>
+                                </div>
+                            </div>
+                            <div class="relative flex gap-8">
+                                <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-[#022c22] font-bold z-10 shadow-lg shadow-accent/40 text-xl"
+                                    style="">4</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold text-[#022c22] mb-3" style="">Suporte
+                                        Sempre Presente</h4>
+                                    <p class="text-slate-500 text-lg" style="">Mesmo após a consulta, nossa equipe
+                                        permanece à disposição para garantir que você se sinta seguro.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative lg:mt-12">
+                        <div class="grid grid-cols-2 gap-6">
+                            <img alt="Clínica"
+                                class="rounded-[2rem] h-80 w-full object-cover shadow-lg transform translate-y-8"
+                                loading="lazy"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5i7xOLbUxo97d3mcgN18zhMY8VoqgDTutOBH-3YyutgrW-S4ecVOAr6qqecb6yCqTo1PeEkxflxZhq_DLRAnWuOEAkr6KR_mxZfmSOzAo2sOkK4VXkjHAZ2mMw5eysztMMyPV8Xq1iDgmINUqtrmBHmzHP6sRm3uOvR9NcfNqEdDaJzmuD5nqaTAU4Xub5vE1Sp6sb-PjNWWCD--0MztgD66yTlrW7P9jwu72asEvNU5i0c6kEE0IN7eZwiOlVU0eeJbE7Pcf55M"
+                                style="">
+                            <img alt="Atendimento" class="rounded-[2rem] h-80 w-full object-cover shadow-lg"
+                                loading="lazy"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC96JORb7w-znk0ZMvkICqCXMgtGysYPf-SEwGw1tHHMqEfV_7zPCxxz-xnyIuvkb0MIJlYazyiEfk0gJhG3QPqXpdhw6pwWOsJs7eshvXd7GRxYebovQKlMi6k5GsOMXBjXWd9DwWl82EN-gpvm_dZbfgqkG8dq4P11yv6h-RARaXr1yPwv0a_QXZpKGBizr_5_jjPQaFW-n79EbffSF8EJcXW2MA5qIEUk3dFbhyfG0lmRqrO4-9tlH9f3mrShvzLacMuSsO9nzA"
+                                style="">
+                        </div>
+                        <div class="mt-16 p-10 bg-[#059669] text-[#022c22] rounded-[2.5rem] shadow-2xl relative">
+                            <span class="material-symbols-outlined text-accent/30 text-8xl absolute top-4 right-8"
+                                style="">format_quote</span>
+                            <h4 class="text-2xl font-bold mb-6 relative z-10" style="">Nosso Compromisso</h4>
+                            <p class="text-blue-100 opacity-90 text-xl leading-relaxed mb-8 italic relative z-10"
+                                style="">
+                                "Minha missão é garantir que cada paciente saia do consultório não apenas com um
+                                diagnóstico, mas com a paz de espírito de ter sido ouvido e respeitado."
+                            </p>
+                            <div class="flex items-center gap-4 relative z-10">
+                                <div class="w-12 h-1 bg-accent rounded-full"></div>
+                                <span class="font-bold text-sm tracking-widest uppercase" style="">Dr. Thiago M.
+                                    Jayme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctoralia Trust Section -->
+        <section class="py-16 bg-[#022c22] relative overflow-hidden" id="doctoralia">
+            <!-- Background Accent -->
+            <div class="absolute -right-20 top-0 w-96 h-96 bg-[#34d399]/5 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div class="absolute -left-20 bottom-0 w-96 h-96 bg-[#34d399]/5 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden relative">
+                    <!-- Subtle pattern -->
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30 pointer-events-none">
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
+                        <div>
+                            <div class="flex items-center gap-3 mb-6">
+                                <img src="https://prowly-prod.s3.eu-west-1.amazonaws.com/uploads/5726/assets/794830/large-c3064e6ec7d00b084843978e11444652.png"
+                                    alt="Doctoralia Logo" class="h-10 object-contain">
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-extrabold text-[#022c22] mb-4">
+                                Excelência comprovada por quem importa: <span class="text-[#059669]">nossos
+                                    pacientes.</span>
+                            </h2>
+                            <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                                Agende sua consulta através da maior plataforma de saúde do mundo e veja por que o Dr.
+                                Thiago Jayme mantém avaliação máxima.
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="https://www.doctoralia.com.br/thiago-mendonca-jayme/cardiologista/goiania"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="bg-[#059669] text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#047857] transition-all shadow-[0_4px_15px_rgba(5,150,105,0.3)] hover:shadow-[0_6px_25px_rgba(5,150,105,0.4)] hover:-translate-y-1">
+                                    <span class="material-symbols-outlined">calendar_month</span>
+                                    Agendar no Doctoralia
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Doctoralia Rating Card -->
+                        <div class="relative">
+                            <div
+                                class="absolute -inset-2 bg-gradient-to-tr from-[#34d399]/20 to-[#059669]/20 blur-xl rounded-[2rem]">
+                            </div>
+                            <div
+                                class="bg-white border border-slate-100 rounded-3xl p-8 shadow-xl relative text-center flex flex-col items-center">
+                                <div class="text-[5rem] font-black text-[#022c22] leading-none mb-2">5.0</div>
+                                <div class="flex text-[#FFC107] text-3xl mb-4 gap-1">
+                                    <span class="material-symbols-outlined fill-current"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined fill-current"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined fill-current"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined fill-current"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="material-symbols-outlined fill-current"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                </div>
+                                <h4 class="font-bold text-xl text-[#065f46] mb-2">Perfil Destaque no Doctoralia</h4>
+                                <p
+                                    class="text-slate-500 font-medium text-sm border-t border-slate-100 pt-4 w-full mt-2 inline-flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">verified_user</span>
+                                    Dezenas de avaliações verificadas
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-white" id="planos">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-[#022c22] mb-6 font-display" style="">
+                    Cuidado acessível para você</h2>
+                <p class="text-xl text-slate-500 max-w-3xl mx-auto mb-16 font-sans" style="">
+                    Atendemos os principais planos de saúde para facilitar o seu acesso ao melhor tratamento
+                    cardiológico.
+                </p>
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 items-center justify-items-center mb-16">
+                    <div
+                        class="w-full max-w-[180px] p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center insurance-logo aspect-video">
+                        <span class="font-extrabold text-blue-800 text-lg italic" style="">Unimed</span>
+                    </div>
+                    <div
+                        class="w-full max-w-[180px] p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center insurance-logo aspect-video">
+                        <span class="font-extrabold text-red-600 text-lg" style="">Bradesco Saúde</span>
+                    </div>
+                    <div
+                        class="w-full max-w-[180px] p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center insurance-logo aspect-video">
+                        <span class="font-extrabold text-orange-600 text-lg" style="">SulAmérica</span>
+                    </div>
+                    <div
+                        class="w-full max-w-[180px] p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center insurance-logo aspect-video">
+                        <span class="font-extrabold text-blue-500 text-lg" style="">Amil</span>
+                    </div>
+                    <div
+                        class="w-full max-w-[180px] p-6 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center insurance-logo aspect-video">
+                        <span class="font-extrabold text-blue-900 text-lg" style="">Cassi</span>
+                    </div>
+                </div>
+                <!-- ... existing link ... -->
+                <p class="text-slate-500 flex items-center justify-center gap-2" style="">
+                    Não encontrou seu plano?
+                    <a class="text-accent font-bold hover:underline inline-flex items-center gap-1"
+                        href="https://wa.me/5500000000000" style="">
+                        Entre em contato e consulte nossa equipe
+                        <span class="material-symbols-outlined text-sm" style="">open_in_new</span>
+                    </a>
+                </p>
+            </div>
+        </section>
+        <section class="py-12 bg-white " id="locais">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-extrabold text-[#022c22] mb-16" style="">Onde estamos para te
+                    receber</h2>
+                <div class="grid lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                    <!-- Instituto de Angiologia Raja Venkata -->
+                    <div
+                        class="bg-slate-50 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-slate-100 flex flex-col xl:col-span-1">
+                        <div class="h-48 overflow-hidden bg-slate-50 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span
+                                    class="material-symbols-outlined text-5xl text-slate-500 opacity-50">apartment</span>
+                            </div>
+                        </div>
+                        <div class="p-8 text-left flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-[#022c22] mb-2" style="">Inst. de Angiologia
+                                Raja Venkata</h3>
+                            <p class="text-slate-500 text-sm mb-6 flex-1 flex items-start gap-2" style="">
+                                <span class="material-symbols-outlined text-accent text-base shrink-0"
+                                    style="">location_on</span>
+                                Setor Oeste, Goiânia - GO
+                            </p>
+                            <a class="block w-full py-4 text-center bg-white  text-[#022c22] font-bold rounded-xl border-2 border-slate-200  hover:bg-[#059669] hover:text-[#022c22] hover:border-primary transition-all shadow-sm"
+                                href="https://wa.me/5500000000000">Agendar</a>
+                        </div>
+                    </div>
+
+                    <!-- Hospital Mater Dei -->
+                    <div
+                        class="bg-slate-50 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-slate-100 flex flex-col xl:col-span-1">
+                        <div class="h-48 overflow-hidden bg-slate-50 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span
+                                    class="material-symbols-outlined text-5xl text-slate-500 opacity-50">local_hospital</span>
+                            </div>
+                        </div>
+                        <div class="p-8 text-left flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-[#022c22] mb-2" style="">Hospital Mater Dei
+                            </h3>
+                            <p class="text-slate-500 text-sm mb-6 flex-1 flex items-start gap-2" style="">
+                                <span class="material-symbols-outlined text-accent text-base shrink-0"
+                                    style="">location_on</span>
+                                Setor Bueno, Goiânia - GO
+                            </p>
+                            <a class="block w-full py-4 text-center bg-white  text-[#022c22] font-bold rounded-xl border-2 border-slate-200  hover:bg-[#059669] hover:text-[#022c22] hover:border-primary transition-all shadow-sm"
+                                href="https://wa.me/5500000000000">Agendar</a>
+                        </div>
+                    </div>
+
+                    <!-- Hospital Santa Mônica -->
+                    <div
+                        class="bg-slate-50 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-slate-100 flex flex-col xl:col-span-1">
+                        <div class="h-48 overflow-hidden bg-slate-50 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-5xl text-slate-500 opacity-50">domain</span>
+                            </div>
+                        </div>
+                        <div class="p-8 text-left flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-[#022c22] mb-2" style="">Hospital Santa
+                                Mônica</h3>
+                            <p class="text-slate-500 text-sm mb-6 flex-1 flex items-start gap-2" style="">
+                                <span class="material-symbols-outlined text-accent text-base shrink-0"
+                                    style="">location_on</span>
+                                Aparecida de Goiânia - GO
+                            </p>
+                            <a class="block w-full py-4 text-center bg-white  text-[#022c22] font-bold rounded-xl border-2 border-slate-200  hover:bg-[#059669] hover:text-[#022c22] hover:border-primary transition-all shadow-sm"
+                                href="https://wa.me/5500000000000">Agendar</a>
+                        </div>
+                    </div>
+
+                    <!-- MedPrime Consultas -->
+                    <div
+                        class="bg-slate-50 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all border border-slate-100 flex flex-col xl:col-span-1">
+                        <div class="h-48 overflow-hidden bg-slate-50 relative">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span
+                                    class="material-symbols-outlined text-5xl text-slate-500 opacity-50">medical_services</span>
+                            </div>
+                        </div>
+                        <div class="p-8 text-left flex-1 flex flex-col">
+                            <h3 class="text-xl font-bold text-[#022c22] mb-2" style="">MedPrime Consultas
+                            </h3>
+                            <p class="text-slate-500 text-sm mb-6 flex-1 flex items-start gap-2" style="">
+                                <span class="material-symbols-outlined text-accent text-base shrink-0"
+                                    style="">location_on</span>
+                                Goiânia - GO
+                            </p>
+                            <a class="block w-full py-4 text-center bg-white  text-[#022c22] font-bold rounded-xl border-2 border-slate-200  hover:bg-[#059669] hover:text-[#022c22] hover:border-primary transition-all shadow-sm"
+                                href="https://wa.me/5500000000000">Agendar</a>
+                        </div>
+                    </div>
+
+                    <!-- Teleconsulta -->
+                    <div
+                        class="bg-[#059669] rounded-[2rem] overflow-hidden shadow-2xl transition-all border border-blue-900 flex flex-col xl:col-span-1 transform lg:-translate-y-4">
+                        <div
+                            class="h-48 overflow-hidden bg-accent relative flex items-center justify-center text-[#022c22] text-center p-6">
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent to-blue-600 opacity-90"></div>
+                            <div class="relative z-10">
+                                <span class="material-symbols-outlined text-5xl mb-2">devices</span>
+                                <p class="font-bold text-lg">Online - Todo Brasil</p>
+                            </div>
+                        </div>
+                        <div class="p-8 text-left flex-1 flex flex-col relative z-10 bg-[#059669]">
+                            <h3 class="text-xl font-bold text-[#022c22] mb-2" style="">Teleconsulta</h3>
+                            <p class="text-blue-100/70 text-sm mb-6 flex-1 flex items-start gap-2" style="">
+                                <span class="material-symbols-outlined text-accent text-base shrink-0"
+                                    style="">videocam</span>
+                                Conforto e segurança da sua casa.
+                            </p>
+                            <a class="block w-full py-4 text-center bg-white text-[#022c22] font-bold rounded-xl hover:bg-accent transition-all shadow-lg"
+                                href="https://wa.me/5500000000000">Agendar Online</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-[#022c22] mb-6" style="">Dúvidas Frequentes
+                    </h2>
+                    <p class="text-xl text-slate-500" style="">Respostas simples para as principais dúvidas do
+                        consultório.</p>
+                </div>
+                <div class="space-y-6">
+                    <details
+                        class="group bg-white rounded-3xl border border-slate-200  shadow-sm transition-all hover:shadow-md"
+                        style="">
+                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none" style="">
+                            <span class="text-xl font-bold text-[#022c22]" style="">Quando devo procurar
+                                um cardiologista?</span>
+                            <span
+                                class="material-symbols-outlined group-open:rotate-180 transition-transform text-accent"
+                                style="">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="px-8 pb-8 text-lg text-slate-500" style="">
+                            Adultos saudáveis sem fatores de risco devem iniciar suas avaliações de rotina a partir dos
+                            35 anos. Porém, se você possui histórico familiar de doenças cardíacas, hipertensão,
+                            colesterol alto, diabetes, ou sente sintomas como palpitações, falta de ar e dor no peito, a
+                            avaliação deve ser feita imediatamente, independentemente da idade.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-3xl border border-slate-200  shadow-sm transition-all hover:shadow-md"
+                        style="">
+                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none" style="">
+                            <span class="text-xl font-bold text-[#022c22]" style="">O marcapasso muda
+                                muito a vida e a rotina?</span>
+                            <span
+                                class="material-symbols-outlined group-open:rotate-180 transition-transform text-accent"
+                                style="">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="px-8 pb-8 text-lg text-slate-500" style="">
+                            Muda para melhor! Ele ajuda seu coração a não falhar e devolve sua energia e expectativa de
+                            vida. Com os equipamentos modernos, após o período de cicatrização inicial (cerca de 30 a 60
+                            dias), você poderá voltar a viajar, usar celular tranquilamente, praticar atividades físicas
+                            e ter uma vida normal com segurança.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-3xl border border-slate-200  shadow-sm transition-all hover:shadow-md"
+                        style="">
+                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none" style="">
+                            <span class="text-xl font-bold text-[#022c22]" style="">Quais exames são
+                                feitos na consulta?</span>
+                            <span
+                                class="material-symbols-outlined group-open:rotate-180 transition-transform text-accent"
+                                style="">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="px-8 pb-8 text-lg text-slate-500" style="">
+                            Dependendo do seu caso, logo após a conversa clínica, posso solicitar exames fundamentais
+                            para avaliar a estrutura e a parte elétrica do coração, como o Eletrocardiograma (ECG), e
+                            exames complementares como Holter, MAPA (para pressão) e Ecocardiograma. Tudo para ter o
+                            diagnóstico mais exato possível.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-3xl border border-slate-200  shadow-sm transition-all hover:shadow-md"
+                        style="">
+                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none" style="">
+                            <span class="text-xl font-bold text-[#022c22]" style="">O que é ablação e
+                                quando é indicada?</span>
+                            <span
+                                class="material-symbols-outlined group-open:rotate-180 transition-transform text-accent"
+                                style="">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="px-8 pb-8 text-lg text-slate-500" style="">
+                            A ablação por cateter é um procedimento minimamente invasivo (feito por punções, sem cortes
+                            grandes) indicado para curar ou controlar Arritmias (coração acelerado, fibrilação atrial).
+                            Consiste em cauterizar as pequenas vias elétricas do coração que estão causando o
+                            curto-circuito. É um procedimento extremamente seguro.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white rounded-3xl border border-slate-200  shadow-sm transition-all hover:shadow-md"
+                        style="">
+                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none" style="">
+                            <span class="text-xl font-bold text-[#022c22]" style="">Como funciona a
+                                consulta via Telemedicina?</span>
+                            <span
+                                class="material-symbols-outlined group-open:rotate-180 transition-transform text-accent"
+                                style="">keyboard_arrow_down</span>
+                        </summary>
+                        <div class="px-8 pb-8 text-lg text-slate-500" style="">
+                            Por videochamada, avalio seus sintomas, tiro dúvidas e oriento tratamentos. Posso fornecer
+                            receitas digitais válidas (com certificado digital), pedidos de exames e atestados. Se já
+                            tiver exames anteriores, você pode me enviar em PDF. É ideal para triagem, risco cirúrgico,
+                            segundas opiniões e retornos, sem sair de casa.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doctoralia Booking Section -->
+        <section class="py-12 bg-white " id="agendar-doctoralia">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <p class="text-accent font-extrabold tracking-widest uppercase text-sm mb-4">Agenda 24h</p>
+                        <h2 class="text-4xl lg:text-5xl font-extrabold text-[#022c22] mb-6">Agende sua
+                            consulta online agora mesmo</h2>
+                        <p class="text-xl text-slate-500 mb-8">
+                            Escolha o melhor horário disponível na minha agenda diretamente pelo sistema da Doctoralia.
+                            Você receberá a confirmação no seu e-mail e lembretes para a consulta.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mb-10">
+                            <span
+                                class="flex items-center gap-2 bg-blue-50  text-blue-700  px-4 py-2 rounded-full font-bold">
+                                <span class="material-symbols-outlined text-accent">star</span> 5.0 Excelente
+                            </span>
+                            <span
+                                class="flex items-center gap-2 bg-slate-100  text-slate-700  px-4 py-2 rounded-full font-bold">
+                                <span class="material-symbols-outlined text-green-500">verified</span> Perfil Verificado
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-slate-50 border-slate-100 p-6 md:p-8 rounded-[2rem] shadow-xl border border-slate-100">
+                        <!-- DOCTORALIA WIDGET SCRIPT -->
+                        <a id="zl-url" class="zl-url"
+                            href="https://www.doctoralia.com.br/thiago-mendonca-jayme/cardiologista/goiania"
+                            rel="nofollow" data-zlw-doctor="thiago-mendonca-jayme" data-zlw-type="big_with_calendar"
+                            data-zlw-opinion="false" data-zlw-hide-mobile="false">Thiago Mendonça Jayme -
+                            Doctoralia.com.br</a>
+                        <script>!function ($_x, _s, id) { var js, fjs = $_x.getElementsByTagName(_s)[0]; if (!$_x.getElementById(id)) { js = $_x.createElement(_s); js.id = id; js.src = "//platform.docplanner.com/js/widget.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "zl-widget-s");</script>
+                        <!-- END WIDGET -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 px-6">
+            <div
+                class="max-w-6xl mx-auto bg-gradient-to-br from-[#059669] to-[#065f46] rounded-[3.5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-[0_20px_50px_rgba(5,150,105,0.3)] border border-[#059669]/20">
+                <div class="relative z-10 max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-8 leading-tight" style="">Cuidar do seu coração é
+                        viver com alegria.</h2>
+                    <p class="text-xl text-teal-50 mb-12 leading-relaxed" style="">
+                        Não deixe sua saúde para depois. Agende uma conversa com nossa equipe e tenha a segurança de
+                        quem é cuidado por especialistas.
+                    </p>
+                    <a class="inline-flex items-center gap-4 bg-white text-[#059669] px-12 py-6 rounded-2xl font-extrabold text-xl hover:bg-[#022c22] hover:text-white transition-all shadow-xl transform hover:-translate-y-1 active:scale-95 duration-300"
+                        href="https://wa.me/5500000000000" style="">
+                        Agendar via WhatsApp agora
+                        <span class="material-symbols-outlined" style="">arrow_forward</span>
+                    </a>
+                    <p class="mt-8 text-sm text-teal-100 uppercase tracking-[0.2em] font-bold" style="">Atendimento
+                        rápido e acolhedor</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-[#022c22] pt-24 pb-12 border-t border-[#213761]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-16 mb-10">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-8">
+                        <img decoding="async" loading="lazy"
+                            src="https://i.postimg.cc/jjvcVryh/Design-sem-nome-(23).png"
+                            alt="Dr. Thiago Mendonça Jayme - Cardiologista"
+                            class="h-20 w-auto object-contain brightness-0 invert">
+                    </div>
+                    <p class="text-base text-blue-100/80 leading-relaxed mb-8" style="">
+                        Cardiologista dedicado a unir ciência avançada com um olhar humano e acolhedor para cada
+                        paciente em Goiânia.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Navegação</h4>
+                    <ul class="space-y-5 text-base text-blue-100/80 font-medium">
+                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#inicio"
+                                style="">Início</a></li>
+                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#ajuda"
+                                style="">Tratamentos</a></li>
+                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#jornada"
+                                style="">Sua Jornada</a></li>
+                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#planos"
+                                style="">Planos Atendidos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Contato</h4>
+                    <ul class="space-y-5 text-base text-blue-100/80">
+                        <li class="flex items-center gap-4" style="">
+                            <span class="material-symbols-outlined text-accent" style="">call</span>
+                            (62) 0000-0000
+                        </li>
+                        <li class="flex items-center gap-4" style="">
+                            <span class="material-symbols-outlined text-accent" style="">chat_bubble</span>
+                            WhatsApp (62) 90000-0000
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Dicas de Saúde
+                    </h4>
+                    <p class="text-sm text-blue-100/80 mb-6" style="">Receba lembretes simples para cuidar do seu
+                        coração.
+                    </p>
+                    <form class="space-y-3">
+                        <input
+                            class="w-full bg-[#213761] border border-[#2d497c] rounded-xl px-5 py-4 text-base text-white placeholder-blue-200/50 focus:ring-2 focus:ring-[#059669] outline-none transition-all"
+                            placeholder="Seu melhor e-mail" type="email">
+                        <button
+                            class="w-full bg-accent text-[#022c22] py-4 rounded-xl font-bold hover:bg-[#059669] transition-all shadow-lg shadow-accent/20"
+                            style="">Receber Dicas</button>
+                    </form>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-slate-100 text-center">
+                <div class="bg-[#213761] inline-block px-8 py-4 rounded-2xl mb-8">
+                    <p class="text-xs text-blue-100/80  font-bold uppercase tracking-[0.2em]" style="">
+                        CRM-GO 19335 | RQE 17470 | RQE 17471
+                    </p>
+                </div>
+                <p class="text-sm text-blue-100/80" style="">
+                    © 2024 Dr. Thiago Mendonça Jayme. Informação médica com ética e transparência.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <a class="fixed bottom-8 right-8 bg-white p-5 rounded-full shadow-2xl text-accent z-40 border border-slate-100 hover:scale-110 active:scale-95 transition-all"
+        href="#inicio" style="">
+        <span class="material-symbols-outlined text-3xl" style="">arrow_upward</span>
+    </a>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5562999999999" target="_blank" rel="noopener noreferrer"
+        class="fixed bottom-24 right-8 lg:bottom-28 lg:right-10 z-50 bg-[#25D366] text-[#022c22] p-4 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center animate-bounce-slow group"
+        aria-label="Falar no WhatsApp">
+        <svg class="w-8 h-8 fill-current group-hover:rotate-12 transition-transform" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M11.996 0C5.372 0 0 5.373 0 11.998c0 2.126.551 4.137 1.523 5.908L.027 24l6.236-1.488A11.91 11.91 0 0011.996 24c6.623 0 11.998-5.373 11.998-11.998C23.994 5.373 18.62 0 11.996 0zm0 21.994c-1.802 0-3.486-.464-4.945-1.28l-.355-.198-3.665.874.888-3.568-.218-.363a9.96 9.96 0 01-1.698-5.467c0-5.522 4.493-10.015 10.012-10.015 5.516 0 10.01 4.492 10.01 10.014 0 5.524-4.494 10.014-10.01 10.014zM16.89 15.2c-.27-.135-1.597-.788-1.844-.88-.248-.09-.43-.136-.61.135-.181.272-.695.88-.852 1.06-.157.18-.314.204-.585.068-.27-.136-1.14-.42-2.172-1.34-1.605-1.503-2.613-3.193-2.77-3.465-.158-.272-.017-.42.118-.555.26-.26.541-.635.811-.952.12-.136.182-.228.272-.363.09-.136.046-.272-.023-.408-.067-.136-.583-1.405-.798-1.922-.212-.507-.426-.438-.585-.446-.157-.009-.336-.01-.518-.01-.182 0-.476.068-.724.34C6.545 7.03 5.8 7.733 5.8 9.162c0 1.428.791 2.81 1.058 3.172.27.363 2.164 3.303 5.244 4.63.734.316 1.306.505 1.752.646.736.234 1.405.2 1.932.12.589-.09 1.597-.654 1.822-1.287.225-.634.225-1.177.158-1.29-.068-.112-.25-.18-.521-.315z" />
+        </svg>
+    </a>
+
+    <!-- Scroll Header Script (Throttled for Performance) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const navLinks = document.querySelectorAll('.header-link');
+            const logo = header.querySelector('img');
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            function updateHeader() {
+                if (window.scrollY > 50) {
+                    header.classList.remove('bg-transparent', 'border-transparent', 'py-2');
+                    header.classList.add('bg-white', 'border-b', 'border-slate-200', 'shadow-sm', 'py-0');
+                    logo.classList.remove('brightness-0', 'invert');
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-[#022c22]');
+                    });
+                } else {
+                    header.classList.add('bg-transparent', 'border-transparent', 'py-2');
+                    header.classList.remove('bg-white', 'border-b', 'border-slate-200', 'shadow-sm', 'py-0');
+                    logo.classList.add('brightness-0', 'invert');
+                    navLinks.forEach(link => {
+                        link.classList.add('text-white');
+                        link.classList.remove('text-[#022c22]');
+                    });
+                }
+                ticking = false;
+            }
+
+            // Initial call to set correct state
+            updateHeader();
+
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateHeader();
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        });
+    </script>
+</body>
+
+</html>

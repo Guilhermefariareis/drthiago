@@ -1,0 +1,15 @@
+# AI / System files
+.agent/
+.gemini/
+.DS_Store
+*.log
+.vscode/
+node_modules/
+dist/
+.env
+
+# Editor config
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
