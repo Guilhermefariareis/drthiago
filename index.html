@@ -1072,28 +1072,7 @@
                         </div>
                     </div>
 
-                    <!-- MedPrime Consultas -->
-                    <div
-                        class="bg-slate-50 border-slate-200 rounded-[2rem] overflow-hidden shadow-md hover:shadow-xl hover:border-[#C9A55A]/50 transition-all border flex flex-col xl:col-span-1 group">
-                        <div
-                            class="h-40 overflow-hidden bg-white relative border-b border-slate-100 flex items-center justify-center p-6">
-                            <img src="logo-medprime.png" alt="MedPrime"
-                                class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                            <span
-                                class="material-symbols-outlined text-5xl text-[#C9A55A] opacity-50 hidden">medical_services</span>
-                        </div>
-                        <div class="p-8 text-left flex-1 flex flex-col">
-                            <h3 class="text-xl font-bold text-[#182847] mb-2">MedPrime Consultas</h3>
-                            <p class="text-slate-500 text-sm mb-6 flex-1 flex items-start gap-2">
-                                <span
-                                    class="material-symbols-outlined text-[#C9A55A] text-base shrink-0">location_on</span>
-                                Goiânia - GO
-                            </p>
-                            <a class="block w-full py-4 text-center bg-white text-[#C9A55A] font-bold rounded-xl border-2 border-[#C9A55A] hover:bg-[#C9A55A] hover:text-white transition-all shadow-sm"
-                                href="https://wa.me/5500000000000">Agendar</a>
-                        </div>
-                    </div>
+
 
                     <!-- Teleconsulta -->
                     <div
@@ -1120,94 +1099,179 @@
                 </div>
             </div>
         </section>
-        <section class="py-16 bg-[#182847] relative overflow-hidden">
+        <section class="py-16 lg:py-24 bg-[#182847] relative overflow-hidden border-t border-white/10 scroll-mt-[82px]" id="duvidas">
             <!-- Background highlight -->
             <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#C9A55A]/5 rounded-full blur-3xl pointer-events-none">
             </div>
 
-            <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-extrabold text-white mb-6">Dúvidas Frequentes</h2>
-                    <p class="text-xl text-slate-300">Respostas simples para as principais dúvidas do consultório.</p>
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10" x-data="{ activeCategory: 'sintomas' }">
+                <div class="text-center mb-10">
+                    <p class="text-[#C9A55A] font-bold tracking-[0.2em] uppercase text-[10px] lg:text-xs mb-3">Tire suas dúvidas</p>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-5">Perguntas Frequentes</h2>
+                    <p class="text-lg text-slate-300 max-w-2xl mx-auto">Respostas rápidas e diretas para as dúvidas corporais e de tratamento que mais surgem no consultório.</p>
                 </div>
-                <div class="space-y-6">
-                    <details
-                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
-                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none">
-                            <span class="text-xl font-bold text-white pr-4">Quando devo procurar um
-                                cardiologista?</span>
-                            <span
-                                class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
-                        </summary>
-                        <div class="px-8 pb-8 text-lg text-slate-300">
-                            Adultos saudáveis sem fatores de risco devem iniciar suas avaliações de rotina a partir dos
-                            35 anos. Porém, se você possui histórico familiar de doenças cardíacas, hipertensão,
-                            colesterol alto, diabetes, ou sente sintomas como palpitações, falta de ar e dor no peito, a
-                            avaliação deve ser feita imediatamente, independentemente da idade.
-                        </div>
-                    </details>
 
-                    <details
-                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
-                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none">
-                            <span class="text-xl font-bold text-white pr-4">O marcapasso muda muito a vida e a
-                                rotina?</span>
-                            <span
-                                class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
-                        </summary>
-                        <div class="px-8 pb-8 text-lg text-slate-300">
-                            Muda para melhor! Ele ajuda seu coração a não falhar e devolve sua energia e expectativa de
-                            vida. Com os equipamentos modernos, após o período de cicatrização inicial (cerca de 30 a 60
-                            dias), você poderá voltar a viajar, usar celular tranquilamente, praticar atividades físicas
-                            e ter uma vida normal com segurança.
-                        </div>
-                    </details>
+                <!-- Tabs Navigation -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10">
+                    <button @click="activeCategory = 'sintomas'" :class="activeCategory === 'sintomas' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Sintomas
+                    </button>
+                    <button @click="activeCategory = 'arritmias'" :class="activeCategory === 'arritmias' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Arritmias
+                    </button>
+                    <button @click="activeCategory = 'exames'" :class="activeCategory === 'exames' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Exames
+                    </button>
+                    <button @click="activeCategory = 'ablacao'" :class="activeCategory === 'ablacao' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Ablação
+                    </button>
+                    <button @click="activeCategory = 'marcapasso'" :class="activeCategory === 'marcapasso' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Marcapasso
+                    </button>
+                    <button @click="activeCategory = 'gerais'" :class="activeCategory === 'gerais' ? 'bg-[#C9A55A] text-[#182847] border-[#C9A55A] shadow-[0_0_15px_rgba(201,165,90,0.4)]' : 'bg-transparent text-slate-300 border-white/20 hover:border-[#C9A55A]/50 hover:text-white'" class="px-5 py-2.5 rounded-full border text-sm font-bold transition-all duration-300 uppercase tracking-wider text-[11px] lg:text-sm">
+                        Gerais
+                    </button>
+                </div>
 
-                    <details
-                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
-                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none">
-                            <span class="text-xl font-bold text-white pr-4">Quais exames são feitos na consulta?</span>
-                            <span
-                                class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
-                        </summary>
-                        <div class="px-8 pb-8 text-lg text-slate-300">
-                            Dependendo do seu caso, logo após a conversa clínica, posso solicitar exames fundamentais
-                            para avaliar a estrutura e a parte elétrica do coração, como o Eletrocardiograma (ECG), e
-                            exames complementares como Holter, MAPA (para pressão) e Ecocardiograma. Tudo para ter o
-                            diagnóstico mais exato possível.
-                        </div>
-                    </details>
+                <div class="w-full relative">
+                    <!-- Sintomas Cardíacos -->
+                    <div x-show="activeCategory === 'sintomas'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Palpitações no coração são perigosas?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                As palpitações podem ter diversas causas, desde fatores benignos como ansiedade e cafeína até arritmias que exigem atenção. Se vierem acompanhadas de tontura, dor no peito ou falta de ar, a investigação deve ser imediata.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
 
-                    <details
-                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
-                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none">
-                            <span class="text-xl font-bold text-white pr-4">O que é ablação e quando é indicada?</span>
-                            <span
-                                class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
-                        </summary>
-                        <div class="px-8 pb-8 text-lg text-slate-300">
-                            A ablação por cateter é um procedimento minimamente invasivo (feito por punções, sem cortes
-                            grandes) indicado para curar ou controlar Arritmias (coração acelerado, fibrilação atrial).
-                            Consiste em cauterizar as pequenas vias elétricas do coração que estão causando o
-                            curto-circuito. É um procedimento extremamente seguro.
-                        </div>
-                    </details>
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Falhas ou "batidas fora do ritmo" são normais?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Essas falhas são chamadas de extrassístoles. Em corações saudáveis, pequenas falhas esporádicas podem ser comuns e sem risco. Porém, se forem frequentes ou gerarem incômodo intenso, é essencial investigar a origem.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
 
-                    <details
-                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
-                        <summary class="flex justify-between items-center p-8 cursor-pointer list-none">
-                            <span class="text-xl font-bold text-white pr-4">Como funciona a consulta via
-                                Telemedicina?</span>
-                            <span
-                                class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
-                        </summary>
-                        <div class="px-8 pb-8 text-lg text-slate-300">
-                            Por videochamada, avalio seus sintomas, tiro dúvidas e oriento tratamentos. Posso fornecer
-                            receitas digitais válidas (com certificado digital), pedidos de exames e atestados. Se já
-                            tiver exames anteriores, você pode me enviar em PDF. É ideal para triagem, risco cirúrgico,
-                            segundas opiniões e retornos, sem sair de casa.
-                        </div>
-                    </details>
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Ansiedade pode causar palpitações? Como diferenciar de arritmia?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Sim, o estresse e a ansiedade liberam adrenalina, o que acelera o coração. A principal diferença é que na ansiedade o coração acelera gradativamente, enquanto em arritmias o início geralmente é súbito. Apenas exames como o Holter ou ECG podem confirmar a diferença.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Arritmias -->
+                    <div x-show="activeCategory === 'arritmias'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">O que são arritmias cardíacas?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Arritmias são alterações nos impulsos elétricos que coordenam os batimentos cardíacos. Isso faz com que o coração bata rápido demais (taquicardia), muito devagar (bradicardia) ou de forma irregular. Existem vários tipos, sendo a fibrilação atrial um dos mais comuns.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Exercício físico é seguro para quem tem arritmia?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Na grande maioria dos casos controlados, sim! A atividade física é encorajada para fortalecer a saúde cardiovascular. Entretanto, dependendo do tipo da arritmia, o cardiologista precisará avaliar o nível de esforço seguro através de um teste ergométrico.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Exames -->
+                    <div x-show="activeCategory === 'exames'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">O que o Holter de 24 horas detecta?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                O Holter é um eletrocardiograma contínuo. Ele avalia o ritmo do seu coração durante um dia inteiro enquanto você realiza suas atividades normais. É fundamental para flagrar arritmias intermitentes que não apareceriam em um exame rápido de repouso.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Ablação -->
+                    <div x-show="activeCategory === 'ablacao'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">O que é ablação cardíaca? E é um procedimento seguro?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                A ablação é um procedimento minimamente invasivo feito por cateter para tratar arritmias. Ela cauteriza pequenas áreas do coração que estão causando curtos-circuitos elétricos. É considerada extremamente segura, com alta taxa de cura para muitas arritmias.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+
+                         <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">A ablação cura a arritmia?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Sim, dependendo do tipo da arritmia, a ablação pode trazer a cura definitiva, liberando o paciente do uso contínuo de medicamentos antiarrítmicos. Já em outros casos mais complexos, o procedimento ajuda a controlar intensamente os sintomas, trazendo qualidade de vida.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Marcapasso -->
+                    <div x-show="activeCategory === 'marcapasso'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Quando é necessário implantar um marcapasso?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                O marcapasso é indicado quando o sistema elétrico natural do coração não consegue manter os batimentos e eles ficam perigosamente lentos (bradicardia), podendo causar desmaios, tonturas intensas ou grave fadiga. Ele monitora e estimula o coração apenas quando necessário.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Quem usa marcapasso pode praticar exercícios?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Completamente! O objetivo principal do marcapasso é justamente devolver a capacidade e a segurança para você viver uma vida ativa. Após o período de recuperação inicial de algumas semanas, a prática de esportes (desde que liberados) é totalmente estimulada.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Gerais / Conversão -->
+                    <div x-show="activeCategory === 'gerais'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="space-y-4" style="display: none;">
+                        <details class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl shadow-sm transition-all hover:bg-white/10 hover:border-white/20">
+                            <summary class="flex justify-between items-center p-6 lg:p-8 cursor-pointer list-none">
+                                <span class="text-lg lg:text-xl font-bold text-white pr-4">Quando devo procurar um especialista em arritmias?</span>
+                                <span class="material-symbols-outlined shrink-0 group-open:rotate-180 transition-transform text-[#C9A55A]">keyboard_arrow_down</span>
+                            </summary>
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 text-base lg:text-lg text-slate-300 leading-relaxed">
+                                Se você tem histórico familiar de morte súbita, desmaios sem explicação, sente o coração "disparar" do nada ou já foi diagnosticado com alguma alteração nos batimentos em exames de rotina. Um eletrofisiologista é o cardiologista focado em tratar especificamente esses casos com a máxima precisão.<br><br>
+                                <span class="text-[#C9A55A] font-semibold">Procure avaliação médica para diagnóstico adequado.</span>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </section>
