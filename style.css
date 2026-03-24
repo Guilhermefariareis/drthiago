@@ -55,7 +55,40 @@ ul {
   --radius: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
-  --transition: all .25s cubic-bezier(.4, 0, .2, 1);
+  --transition: all .3s cubic-bezier(.4, 0, .2, 1);
+  /* Fluid Typography - Senior Patterns */
+  --font-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --font-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --font-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --font-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --font-3xl: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+  --font-hero: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  /* Touch Ergonomics */
+  --touch-target: 48px;
+}
+
+/* Touch Target Standardization */
+button, 
+a.btn, 
+.header-link,
+.mobile-link {
+    min-height: var(--touch-target);
+    display: inline-flex;
+    align-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -92,7 +125,7 @@ ul {
 
 .title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--font-3xl);
   font-weight: 700;
   color: var(--navy);
   line-height: 1.2;
@@ -103,7 +136,7 @@ ul {
 }
 
 .subtitle {
-  font-size: 1.125rem;
+  font-size: var(--font-lg);
   color: var(--grey-600);
   line-height: 1.75;
   max-width: 640px;

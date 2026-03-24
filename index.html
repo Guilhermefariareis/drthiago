@@ -40,10 +40,10 @@
                         '2xl': '2.5rem',
                     },
                     animation: {
-                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-                        'fade-in-up-delay-1': 'fade-in-up 0.8s ease-out 0.2s forwards',
-                        'fade-in-up-delay-2': 'fade-in-up 0.8s ease-out 0.4s forwards',
-                        'fade-in-up-delay-3': 'fade-in-up 0.8s ease-out 0.6s forwards',
+                        'fade-in-up': 'fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-up-delay-1': 'fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards',
+                        'fade-in-up-delay-2': 'fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards',
+                        'fade-in-up-delay-3': 'fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards',
                         'float': 'float 5s ease-in-out infinite',
                         'float-slow': 'float 7s ease-in-out infinite',
                         'pulse-glow': 'pulse-glow 2.5s ease-in-out infinite',
@@ -52,7 +52,7 @@
                     },
                     keyframes: {
                         'fade-in-up': {
-                            '0%': { opacity: '0', transform: 'translate3d(0, 30px, 0)' },
+                            '0%': { opacity: '0', transform: 'translate3d(0, 20px, 0)' },
                             '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' },
                         },
                         'float': {
@@ -79,13 +79,13 @@
         };
     </script>
     <style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply text-[18px] leading-relaxed;
-            }
-            h1, h2, h3, h4 {
-                @apply tracking-tight font-display;
-            }
+        body {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Nunito', sans-serif;
+            letter-spacing: -0.02em;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
@@ -95,6 +95,7 @@
         .text-gradient {
             background: linear-gradient(90deg, #1A2E44, #5C6B7B);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .step-line::before {
@@ -165,29 +166,79 @@
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a class="text-sm font-semibold header-link text-white hover:text-[#C9A55A] transition-colors"
-                        href="#inicio" style="">Início</a>
+                        href="#inicio">Início</a>
                     <a class="text-sm font-semibold header-link text-white hover:text-[#C9A55A] transition-colors"
-                        href="#sobre" style="">Dr. Thiago</a>
+                        href="#sobre">Dr. Thiago</a>
                     <a class="text-sm font-semibold header-link text-white hover:text-[#C9A55A] transition-colors"
-                        href="#ajuda" style="">Tratamentos</a>
+                        href="#ajuda">Tratamentos</a>
                     <a class="text-sm font-semibold header-link text-white hover:text-[#C9A55A] transition-colors"
-                        href="#jornada" style="">Sua
+                        href="#jornada">Sua
                         Jornada</a>
                     <a class="text-sm font-semibold header-link text-white hover:text-[#C9A55A] transition-colors"
-                        href="#planos" style="">Convênios</a>
+                        href="#planos">Convênios</a>
                 </nav>
-                <div>
-                    <a class="bg-white text-[#182847] px-7 py-3 rounded-full font-extrabold text-sm flex items-center gap-2 hover:bg-slate-100 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] border border-transparent"
-                        href="https://wa.me/5500000000000" style="">
+                <div class="flex items-center gap-4">
+                    <a class="hidden sm:flex bg-white text-[#182847] px-7 py-3 rounded-full font-extrabold text-sm items-center gap-2 hover:bg-slate-100 transition-all shadow-[0_4px_15px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] border border-transparent"
+                        href="https://wa.me/5500000000000">
                         Agendar Consulta
                     </a>
+                    <!-- Mobile Menu Trigger -->
+                    <button id="menuBtn" class="md:hidden flex items-center justify-center p-2 rounded-xl bg-white/10 border border-white/20 text-white transition-all hover:bg-white/20" aria-label="Abrir menu">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Premium Mobile Menu Overlay -->
+        <div id="mobileMenu" class="fixed inset-0 z-[100] bg-[#182847] translate-x-full transition-transform duration-500 ease-in-out lg:hidden pointer-events-none opacity-0 [&.open]:translate-x-0 [&.open]:pointer-events-auto [&.open]:opacity-100">
+            <div class="flex flex-col h-full p-8 relative overflow-hidden">
+                <!-- Background Accent -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#C9A55A]/5 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="flex justify-between items-center mb-12">
+                    <img src="https://i.postimg.cc/jjvcVryh/Design-sem-nome-(23).png" alt="Dr. Thiago" class="h-12 w-auto brightness-0 invert">
+                    <button id="mobileClose" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/10 hover:bg-[#C9A55A] transition-colors" aria-label="Fechar menu">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                
+                <nav class="flex flex-col gap-6 mb-auto">
+                    <a class="mobile-link text-2xl font-bold text-white hover:text-[#C9A55A] transition-colors flex items-center gap-4 border-b border-white/5 pb-4" href="#inicio">
+                        <span class="material-symbols-outlined text-[#C9A55A]">home</span>
+                        Início
+                    </a>
+                    <a class="mobile-link text-2xl font-bold text-white hover:text-[#C9A55A] transition-colors flex items-center gap-4 border-b border-white/5 pb-4" href="#sobre">
+                        <span class="material-symbols-outlined text-[#C9A55A]">person</span>
+                        Dr. Thiago
+                    </a>
+                    <a class="mobile-link text-2xl font-bold text-white hover:text-[#C9A55A] transition-colors flex items-center gap-4 border-b border-white/5 pb-4" href="#ajuda">
+                        <span class="material-symbols-outlined text-[#C9A55A]">medical_services</span>
+                        Tratamentos
+                    </a>
+                    <a class="mobile-link text-2xl font-bold text-white hover:text-[#C9A55A] transition-colors flex items-center gap-4 border-b border-white/5 pb-4" href="#jornada">
+                        <span class="material-symbols-outlined text-[#C9A55A]">route</span>
+                        Sua Jornada
+                    </a>
+                    <a class="mobile-link text-2xl font-bold text-white hover:text-[#C9A55A] transition-colors flex items-center gap-4 border-b border-white/5 pb-4" href="#planos">
+                        <span class="material-symbols-outlined text-[#C9A55A]">credit_card</span>
+                        Convênios
+                    </a>
+                </nav>
+                
+                <div class="pt-8 mt-auto border-t border-white/10">
+                    <a href="https://wa.me/5500000000000" class="w-full bg-[#C9A55A] text-[#182847] py-4 rounded-2xl font-black text-center block mb-4 shadow-lg shadow-[#C9A55A]/20">
+                        Agendar via WhatsApp
+                    </a>
+                    <div class="text-center">
+                        <p class="text-blue-100/50 text-xs font-bold uppercase tracking-widest">CRM-GO 19335</p>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
     <main class="">
         <section
-            class="relative overflow-hidden min-h-[100svh] flex items-center pt-28 pb-6 lg:pt-32 lg:pb-8 bg-[#182847] text-white scroll-mt-[82px]"
+            class="relative overflow-hidden min-h-[100svh] flex items-center pt-28 pb-32 lg:pt-32 lg:pb-8 bg-[#182847] text-white scroll-mt-[82px]"
             id="inicio">
             <!-- Background gradients (Premium White) -->
             <div
@@ -259,18 +310,18 @@
                                 <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#182847]"
                                     loading="lazy"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAebeRcMTzVX6QADG2QKQwSkOGx3fD8XIKZOw37ooySxCO2XDVGqu4915zruk9vXXrXOSpNj3kxeCdn3tS3DTTGBmcvDbDjuEgHU_JiAChGZ7UIK-ljYRea3m0SMhIK6ojhyhHCl9WS_hVdPipJlscZ33cDpOsDnr4TIdJnTntq6aUPRr1qpVP0aZYPoiZCDgEU-kKR-dlB4o6nvBiA0VkkVGmX_sZCk_TA2yqus35NsczE104n3xo5XmLOGlDH2HJr5EegTG8PI2E"
-                                    style="">
+                                   >
                                 <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#182847]"
                                     loading="lazy"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAETTSzvjleGta4bEyMcuYg00Yz33OEDucPczXE5qSTZ8Bkk2YLHHqyFtV0ez7qBLMvEsDJVsC3YluwcnPv552K_3zv97DB8nkNPhURrxha3ujff0U6VUgONBrPeY9JsvCLr5vSiYKO8UHDXj7lR-twEWJ7KGcWLzvkhBBGu2AFI25evoQQK646Y15Hg6V1HEUZjyC0nrpxsZAKgfAfFky1E24xzwc3rCnMPIhkcBsozvZynuuAhxwqUYyN44OPWAvbiL--KGIQh94"
-                                    style="">
+                                   >
                                 <img alt="Paciente" class="w-12 h-12 rounded-full border-4 border-[#182847]"
                                     loading="lazy"
                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJX0sdW0RQsoV92sjSjJC_fj4Aqchc73SKWbxtRedZhMdv96Mg_CnvIUiGjIaQQBcWlou7SZkVt6nDoXv9EfpY5IOazaHwjvqE_ykUWSInZniO2wl0CFzwP8kVaA_ehMM3qTAqXrkZwNrSblwgDI3D5eRaeGaK_VAmHR0JJY8DOnxyfIJuuVzk8WFMplDhsWq598n4FkCgX2MCOXV8xfJQC9oVFF6-16O_cNTAuR3MJPUwV4VVXqQqXHeUUH1Pmq8xFYQ2NoSDH9Q"
-                                    style="">
+                                   >
                             </div>
-                            <p class="text-sm font-semibold text-blue-200/70" style="">Mais de <span
-                                    class="text-[#C9A55A] font-extrabold" style="">5.000 pacientes</span> cuidados com
+                            <p class="text-sm font-semibold text-blue-200/70">Mais de <span
+                                    class="text-[#C9A55A] font-extrabold">5.000 pacientes</span> cuidados com
                                 toda
                                 a
                                 atenção.</p>
@@ -647,50 +698,50 @@
                         <p class="text-[#8C6D31] font-bold tracking-[0.2em] uppercase text-[10px] lg:text-xs mb-3">
                             Sua Jornada
                         </p>
-                        <h2 class="text-[2.1rem] lg:text-[2.7rem] font-extrabold text-[#182847] mb-4" style="">Como
+                        <h2 class="text-[2.1rem] lg:text-[2.7rem] font-extrabold text-[#182847] mb-4">Como
                             será o seu atendimento</h2>
-                        <p class="text-[0.95rem] lg:text-[1.05rem] text-slate-500 mb-8" style="">Desde o primeiro
+                        <p class="text-[0.95rem] lg:text-[1.05rem] text-slate-500 mb-8">Desde o primeiro
                             contato, cuidamos de cada
                             detalhe para que sua experiência seja leve e sem estresse.</p>
                         <div class="space-y-6">
                             <div class="relative flex gap-4 step-line">
                                 <div class="flex-shrink-0 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold z-10 shadow-lg shadow-accent/40 text-[1.05rem]"
-                                    style="">1</div>
+                                   >1</div>
                                 <div>
-                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1" style="">
+                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1">
                                         Boas-vindas e Agendamento</h4>
-                                    <p class="text-slate-500 text-[0.95rem]" style="">Nossa equipe atende você de
+                                    <p class="text-slate-500 text-[0.95rem]">Nossa equipe atende você de
                                         forma humana, tirando dúvidas e agendando seu horário.</p>
                                 </div>
                             </div>
                             <div class="relative flex gap-4 step-line">
                                 <div class="flex-shrink-0 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold z-10 shadow-lg shadow-accent/40 text-[1.05rem]"
-                                    style="">2</div>
+                                   >2</div>
                                 <div>
-                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1" style="">Conversa
+                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1">Conversa
                                         Sem Pressa</h4>
-                                    <p class="text-slate-500 text-[0.95rem]" style="">Dr. Thiago ouve sua
+                                    <p class="text-slate-500 text-[0.95rem]">Dr. Thiago ouve sua
                                         história com atenção, priorizando entender você antes dos exames.</p>
                                 </div>
                             </div>
                             <div class="relative flex gap-4 step-line">
                                 <div class="flex-shrink-0 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold z-10 shadow-lg shadow-accent/40 text-[1.05rem]"
-                                    style="">3</div>
+                                   >3</div>
                                 <div>
-                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1" style="">Plano de
+                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1">Plano de
                                         Cuidado Simples</h4>
-                                    <p class="text-slate-500 text-[0.95rem]" style="">Explicamos o diagnóstico de forma
+                                    <p class="text-slate-500 text-[0.95rem]">Explicamos o diagnóstico de forma
                                         visual
                                         e criamos juntos um caminho para sua recuperação.</p>
                                 </div>
                             </div>
                             <div class="relative flex gap-4">
                                 <div class="flex-shrink-0 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold z-10 shadow-lg shadow-accent/40 text-[1.05rem]"
-                                    style="">4</div>
+                                   >4</div>
                                 <div>
-                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1" style="">Suporte
+                                    <h4 class="text-xl md:text-2xl font-bold text-[#182847] mb-1">Suporte
                                         Sempre Presente</h4>
-                                    <p class="text-slate-500 text-[0.95rem]" style="">Mesmo após a consulta, nossa
+                                    <p class="text-slate-500 text-[0.95rem]">Mesmo após a consulta, nossa
                                         equipe
                                         permanece à disposição para garantir que você se sinta seguro.</p>
                                 </div>
@@ -701,10 +752,10 @@
                         <div class="grid grid-cols-2 gap-4">
                             <img alt="Clínica"
                                 class="rounded-[1.5rem] h-[15rem] lg:h-[17rem] w-full object-cover shadow-lg transform translate-y-6"
-                                loading="lazy" src="nova-foto-1.jpeg" style="">
+                                loading="lazy" src="nova-foto-1.jpeg">
                             <img alt="Atendimento"
                                 class="rounded-[1.5rem] h-[15rem] lg:h-[17rem] w-full object-cover shadow-lg"
-                                loading="lazy" src="nova-foto-2.jpeg" style="">
+                                loading="lazy" src="nova-foto-2.jpeg">
                         </div>
                         <div
                             class="mt-10 p-8 bg-white/40 backdrop-blur-md border border-[#C9A55A]/20 rounded-[2.5rem] shadow-xl relative overflow-hidden group">
@@ -1473,41 +1524,41 @@
                             alt="Dr. Thiago Mendonça Jayme - Cardiologista"
                             class="h-20 w-auto object-contain brightness-0 invert">
                     </div>
-                    <p class="text-base text-blue-100/80 leading-relaxed mb-8" style="">
+                    <p class="text-base text-blue-100/80 leading-relaxed mb-8">
                         Cardiologista dedicado a unir ciência avançada com um olhar humano e acolhedor para cada
                         paciente em Goiânia.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Navegação</h4>
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest">Navegação</h4>
                     <ul class="space-y-5 text-base text-blue-100/80 font-medium">
-                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#inicio"
-                                style="">Início</a></li>
-                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#ajuda"
-                                style="">Tratamentos</a></li>
-                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#jornada"
-                                style="">Sua Jornada</a></li>
-                        <li class="" style=""><a class="hover:text-accent transition-colors" href="#planos"
-                                style="">Planos Atendidos</a></li>
+                        <li class=""><a class="hover:text-accent transition-colors" href="#inicio"
+                               >Início</a></li>
+                        <li class=""><a class="hover:text-accent transition-colors" href="#ajuda"
+                               >Tratamentos</a></li>
+                        <li class=""><a class="hover:text-accent transition-colors" href="#jornada"
+                               >Sua Jornada</a></li>
+                        <li class=""><a class="hover:text-accent transition-colors" href="#planos"
+                               >Planos Atendidos</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Contato</h4>
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest">Contato</h4>
                     <ul class="space-y-5 text-base text-blue-100/80">
-                        <li class="flex items-center gap-4" style="">
-                            <span class="material-symbols-outlined text-accent" style="">call</span>
+                        <li class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-accent">call</span>
                             (62) 0000-0000
                         </li>
-                        <li class="flex items-center gap-4" style="">
-                            <span class="material-symbols-outlined text-accent" style="">chat_bubble</span>
+                        <li class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-accent">chat_bubble</span>
                             WhatsApp (62) 90000-0000
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest" style="">Dicas de Saúde
+                    <h4 class="font-extrabold mb-8 text-white uppercase text-sm tracking-widest">Dicas de Saúde
                     </h4>
-                    <p class="text-sm text-blue-100/80 mb-6" style="">Receba lembretes simples para cuidar do seu
+                    <p class="text-sm text-blue-100/80 mb-6">Receba lembretes simples para cuidar do seu
                         coração.
                     </p>
                     <form class="space-y-3">
@@ -1516,29 +1567,29 @@
                             placeholder="Seu melhor e-mail" type="email">
                         <button
                             class="w-full bg-accent text-[#182847] py-4 rounded-xl font-bold hover:bg-[#C9A55A] transition-all shadow-lg shadow-accent/20"
-                            style="">Receber Dicas</button>
+                           >Receber Dicas</button>
                     </form>
                 </div>
             </div>
             <div class="pt-12 border-t border-slate-100 text-center">
                 <div class="bg-[#213761] inline-block px-8 py-4 rounded-2xl mb-8">
-                    <p class="text-xs text-blue-100/80  font-bold uppercase tracking-[0.2em]" style="">
+                    <p class="text-xs text-blue-100/80  font-bold uppercase tracking-[0.2em]">
                         CRM-GO 19335 | RQE 17470 | RQE 17471
                     </p>
                 </div>
-                <p class="text-sm text-blue-100/80" style="">
+                <p class="text-sm text-blue-100/80">
                     © 2026 Dr. Thiago Mendonça Jayme. Informação médica com ética e transparência.
                 </p>
             </div>
         </div>
     </footer>
-    <a class="fixed bottom-8 right-8 bg-white p-5 rounded-full shadow-2xl text-accent z-40 border border-slate-100 hover:scale-110 active:scale-95 transition-all"
-        href="#inicio" style="">
-        <span class="material-symbols-outlined text-3xl" style="">arrow_upward</span>
+    <a class="hidden md:flex fixed bottom-8 right-8 bg-white p-5 rounded-full shadow-2xl text-accent z-40 border border-slate-100 hover:scale-110 active:scale-95 transition-all"
+        href="#inicio">
+        <span class="material-symbols-outlined text-3xl">arrow_upward</span>
     </a>
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/5562999999999" target="_blank" rel="noopener noreferrer"
-        class="fixed bottom-24 right-8 lg:bottom-28 lg:right-10 z-50 bg-[#25D366] text-[#182847] p-4 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center animate-bounce-slow group"
+        class="hidden md:flex fixed bottom-24 right-8 lg:bottom-28 lg:right-10 z-50 bg-[#25D366] text-[#182847] p-4 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 items-center justify-center animate-bounce-slow group"
         aria-label="Falar no WhatsApp">
         <svg class="w-8 h-8 fill-current group-hover:rotate-12 transition-transform" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
@@ -1548,6 +1599,19 @@
     </a>
 
     <!-- Core Scripts -->
+    <!-- Premium Sticky Mobile Action Bar -->
+    <div id="mobileStickyBar" class="md:hidden fixed bottom-6 left-6 right-6 z-[80] pointer-events-none transition-all duration-300">
+        <div class="bg-[#182847]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl flex items-center gap-2 pointer-events-auto ring-1 ring-white/5">
+            <a href="https://wa.me/5562999999999" class="flex-1 bg-[#C9A55A] text-[#182847] h-14 rounded-xl flex items-center justify-center gap-2 font-black text-sm uppercase tracking-wider active:scale-95 transition-transform">
+                <span class="material-symbols-outlined text-xl">calendar_today</span>
+                Agendar
+            </a>
+            <a href="tel:556200000000" class="w-14 h-14 bg-white/10 text-white rounded-xl flex items-center justify-center border border-white/10 active:scale-95 transition-transform">
+                <span class="material-symbols-outlined">call</span>
+            </a>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Scroll animations
@@ -1608,10 +1672,21 @@
             const menuBtn = document.getElementById('menuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileClose = document.getElementById('mobileClose');
-            menuBtn?.addEventListener('click', () => mobileMenu.classList.add('open'));
-            mobileClose?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+            
+            const toggleMenu = (isOpen) => {
+                if (isOpen) {
+                    mobileMenu.classList.add('open');
+                    document.body.classList.add('menu-open');
+                } else {
+                    mobileMenu.classList.remove('open');
+                    document.body.classList.remove('menu-open');
+                }
+            };
+
+            menuBtn?.addEventListener('click', () => toggleMenu(true));
+            mobileClose?.addEventListener('click', () => toggleMenu(false));
             document.querySelectorAll('.mobile-link').forEach(a => {
-                a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+                a.addEventListener('click', () => toggleMenu(false));
             });
 
             // FAQ accordion
