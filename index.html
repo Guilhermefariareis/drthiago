@@ -1579,6 +1579,8 @@
                 if (!header || !logo) return;
                 const isStickyVisible = window.scrollY > 400;
                 const stickyBar = document.getElementById('mobileStickyBar');
+                const menuBtn = document.getElementById('menuBtn');
+                const ctaBtn = header.querySelector('a[href^="https://wa.me"]');
 
                 if (scrolled) {
                     header.classList.remove('bg-transparent', 'border-transparent', 'py-2');
@@ -1588,6 +1590,16 @@
                         link.classList.remove('text-white');
                         link.classList.add('text-[#182847]');
                     });
+                    
+                    if (menuBtn) {
+                        menuBtn.classList.remove('text-white', 'bg-white/10', 'border-white/20', 'hover:bg-white/20');
+                        menuBtn.classList.add('text-[#C9A55A]', 'bg-[#C9A55A]/10', 'border-[#C9A55A]/20', 'hover:bg-[#C9A55A]/20');
+                    }
+
+                    if (ctaBtn && ctaBtn.classList.contains('sm:flex')) {
+                        ctaBtn.classList.remove('bg-white', 'text-[#182847]', 'hover:bg-slate-100');
+                        ctaBtn.classList.add('bg-[#C9A55A]', 'text-white', 'hover:bg-[#B08B40]');
+                    }
                 } else {
                     header.classList.add('bg-transparent', 'border-transparent', 'py-2');
                     header.classList.remove('bg-white', 'border-b', 'border-slate-200', 'shadow-sm', 'py-0');
@@ -1596,6 +1608,16 @@
                         link.classList.add('text-white');
                         link.classList.remove('text-[#182847]');
                     });
+
+                    if (menuBtn) {
+                        menuBtn.classList.add('text-white', 'bg-white/10', 'border-white/20', 'hover:bg-white/20');
+                        menuBtn.classList.remove('text-[#C9A55A]', 'bg-[#C9A55A]/10', 'border-[#C9A55A]/20', 'hover:bg-[#C9A55A]/20');
+                    }
+
+                    if (ctaBtn && ctaBtn.classList.contains('sm:flex')) {
+                        ctaBtn.classList.add('bg-white', 'text-[#182847]', 'hover:bg-slate-100');
+                        ctaBtn.classList.remove('bg-[#C9A55A]', 'text-white', 'hover:bg-[#B08B40]');
+                    }
                 }
 
                 // Mobile Sticky Bar Trigger
