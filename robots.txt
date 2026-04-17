@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drthiagomendonca.med.br/sitemap.xml
